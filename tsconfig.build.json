@@ -1,0 +1,15 @@
+// 构建前配置：优先与真实 Node 运行时保持一致，防止“类型通过但运行失败”。
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    // 重大决策：构建检查阶段使用 NodeNext，严格按 Node ESM/CJS 规则校验。
+    "module": "NodeNext",
+    // 与 module 保持一致，确保解析行为贴近 Node 真实执行语义。
+    "moduleResolution": "NodeNext",
+    // 这里仍只做校验，不额外产出 JS；真正构建由 tsup 负责。
+    "noEmit": true
+  },
+  // 构建前将业务源码和测试一起做一致性校验。
+  "include": ["src", "test"]
+}

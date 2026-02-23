@@ -1,0 +1,18 @@
+// 开发配置：优先 IDE 体验（跳转、自动导入）和日常迭代速度。
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    // 开发阶段只做类型检查，不在此处决定最终发包模块格式。
+    "module": "ES2022",
+    // 重大决策：选择 bundler 以改善跨项目源码导航体验。
+    // 代价：其解析策略与 Node 运行时并非完全一致，因此仅用于开发检查。
+    "moduleResolution": "bundler",
+    // 开发配置不产物，避免与 tsup 构建输出冲突。
+    "noEmit": true,
+    // 关闭模块解析跟踪日志，保持日常输出可读。
+    "traceResolution": false
+  },
+  // 开发期同时检查源码、测试和 vitest 配置，尽早发现类型问题。
+  "include": ["src", "test", "vitest.config.ts"]
+}

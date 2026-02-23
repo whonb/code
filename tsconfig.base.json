@@ -1,0 +1,39 @@
+// base配置, 为构建和开发配置提供公共选项
+{
+  // 为编辑器提供 tsconfig 的 JSON Schema 自动提示与校验。
+  "$schema": "https://json.schemastore.org/tsconfig",
+  // 复用社区推荐基线，避免遗漏常见安全/兼容配置。
+  "extends": ["@tsconfig/recommended/tsconfig.json"],
+  "compilerOptions": {
+    // 统一以现代 Node 运行时能力为下限，避免为过旧环境降级语法。
+    "target": "ES2022",
+    // 仅引入 ES2022 标准库类型，不默认混入浏览器 DOM 类型，避免 Node CLI 场景误用。
+    "lib": ["ES2022"],
+    // 开启严格模式，优先在编译期暴露潜在缺陷。
+    "strict": true,
+    // 产出 .d.ts，便于包发布和跨项目类型消费。
+    "declaration": true,
+    // 产出源码映射，便于调试和问题定位。
+    "sourceMap": true,
+    // 强制将文件视为模块，避免脚本模式造成全局污染。
+    "moduleDetection": "force",
+    // 统一构建输出目录，便于清理和发布。
+    "outDir": "dist",
+    // 显式声明 Node 类型来源，避免环境类型歧义。
+    "types": ["node"],
+    // catch 变量默认 unknown，强制显式收窄，减少误判。
+    "useUnknownInCatchVariables": true,
+    // 改善与 CommonJS 生态的互操作，降低第三方包接入摩擦。
+    "esModuleInterop": true,
+    // 统一大小写敏感行为，避免跨平台路径问题。
+    "forceConsistentCasingInFileNames": true,
+    // 不检查第三方 .d.ts，可显著提升编译性能；风险由依赖方承担。
+    "skipLibCheck": true,
+    // 允许直接导入 JSON，简化配置读取。
+    "resolveJsonModule": true,
+    // 索引访问自动附加 undefined，逼迫调用方处理越界/缺失。
+    "noUncheckedIndexedAccess": true,
+    // 可选属性语义更严格，区分“缺失”和“显式 undefined”。
+    "exactOptionalPropertyTypes": true
+  }
+}

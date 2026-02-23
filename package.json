@@ -1,0 +1,47 @@
+{
+  "name": "nbcode",
+  "version": "0.1.0",
+  "description": "Modern Node.js CLI starter",
+  "type": "module",
+  "bin": {
+    "nbcode": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "build": "npm run typecheck:build && tsup src/cli.ts --format esm --dts --out-dir dist --clean",
+    "typecheck": "tsc -p tsconfig.json",
+    "typecheck:build": "tsc -p tsconfig.build.json",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "cli",
+    "nodejs",
+    "typescript"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^14.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@tsconfig/recommended": "^1.0.13",
+    "@types/node": "^24.0.0",
+    "eslint": "^9.21.0",
+    "globals": "^16.0.0",
+    "tsup": "^8.4.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0",
+    "typescript-eslint": "^8.25.0",
+    "vitest": "^3.0.0"
+  }
+}
