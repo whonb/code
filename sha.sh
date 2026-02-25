@@ -65,6 +65,36 @@ clean() {
 }
 
 ####################################################
+# 开发命令 (从 package.json scripts 迁移)
+####################################################
+
+dev() {
+  _run tsx src/cli.ts
+}
+
+build() {
+  _run npm run typecheck:build && tsup src/cli.ts --format esm --dts --out-dir dist --clean
+}
+
+check() {
+  dev() {
+    _run tsc -p tsconfig.json
+  }
+  build() {
+    _run tsc -p tsconfig.build.json
+  }
+}
+
+
+lint() {
+  _run eslint .
+}
+
+test() {
+  _run vitest run
+}
+
+####################################################
 # app entry script & _root cmd
 ####################################################
 

@@ -17,13 +17,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "dev": "tsx src/cli.ts",
-    "build": "npm run typecheck:build && tsup src/cli.ts --format esm --dts --out-dir dist --clean",
-    "typecheck": "tsc -p tsconfig.json",
-    "typecheck:build": "tsc -p tsconfig.build.json",
-    "lint": "eslint .",
-    "test": "vitest run",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "./sha.sh build"
   },
   "keywords": [
     "cli",
