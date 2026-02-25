@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Modern Node.js CLI starter",
   "type": "module",
+  "packageManager": "pnpm@10.30.2",
   "bin": {
     "nbcode": "./dist/cli.js"
   },
@@ -15,6 +16,7 @@
     "node": ">=20"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "tsx src/cli.ts",
     "build": "npm run typecheck:build && tsup src/cli.ts --format esm --dts --out-dir dist --clean",
     "typecheck": "tsc -p tsconfig.json",
