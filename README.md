@@ -9,6 +9,19 @@
 - [context7](https://context7.com/websites/geminicli)
 - [deepwiki](https://deepwiki.com/google-gemini/gemini-cli)
 
+### code agent cli
+
+agent cli真正免费能打的就这几个：
+
+- geminicli 
+- codebuddy
+- qwen-code
+
+试用：
+
+- codex: 额度少
+
+
 ## bot-doc
 
 下载同步: git clone依赖的原始项目
