@@ -1,34 +1,18 @@
 # nbcode
 
-ai agent code 闭环实践.
+## 概述
+本项目实践ai闭环工作流, 从定义ai任务开始, 到ai执行, 再到ai反馈, 循环往复, 直到任务完成，任务流转依赖github project或聊天软件完成。
 
-## 环境要求
+## 参考
 
-- Node.js >= 20
-- npm >= 10
+- [geminicli](https://geminicli.com)为例:
+- [context7](https://context7.com/websites/geminicli)
+- [deepwiki](https://deepwiki.com/google-gemini/gemini-cli)
 
-## 快速开始
+## bot-doc
 
-```bash
-npm install
-npm run dev -- --help
-```
-
-## 可用命令
-
-- `npm run dev -- --name codex`：开发模式运行 CLI
-- `npm run build`：构建到 `dist/`
-- `npm run typecheck`：开发配置类型检查（bundler）
-- `npm run typecheck:build`：构建配置类型检查（NodeNext）
-- `npm run lint`：代码检查
-- `npm run test`：运行测试
-
-## 发布
-
-构建后，CLI 可执行文件为：
-
-- `dist/cli.js`
-
-`package.json` 已定义：
-
-- `bin.nbcode = ./dist/cli.js`
+下载同步: git clone依赖的原始项目
+预处理：利用 Repomix 等工具将仓库“脱水”，剔除干扰，保留骨架。
+符号化：利用 tree-sitter 等工具生成精确的符号表，作为 AI 的导航地图。
+动态注入：不追求一次性处理所有代码，而是通过 LLM 编排，根据场景动态加载相关的代码片段。
+标准化导航：在库中引入类似 llms.txt 的 AI 友好型说明文件，作为知识库的“高速缓存”。
