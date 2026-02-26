@@ -11,15 +11,52 @@
 
 ### code agent cli
 
-agent cli真正免费能打的就这几个：
+- cli
+  - agent cli真正免费能打的就这几个：
+    - geminicli 
+    - codebuddy
+    - qwen-code
+  - 试用：
+    - codex: 额度少
+- 其他
+  - [v0 by Vercel](https://v0.app)  
 
-- geminicli 
-- codebuddy
-- qwen-code
 
-试用：
+### tui lib
 
-- codex: 额度少
+- [ink](https://github.com/vadimdemedes/ink)
+- [opentui](https://github.com/anomalyco/opentui)
+- [pi-tui](https://github.com/badlogic/pi-mono/tree/main/packages/tui)
+- <https://github.com/RtlZeroMemory/Rezi>
+  - c语言引擎，漂亮
+
+### gen ui / agent ui
+
+
+- **重要参考**
+- [json-render](https://github.com/vercel-labs/json-render)  
+- [Vercel AI SDK](https://vercel.com/docs/ai-sdk)  
+- [CopilotKit](https://github.com/CopilotKit/CopilotKit)  
+  - copilotkit generative-ui
+    - <https://docs.copilotkit.ai/generative-ui>
+    - <https://github.com/CopilotKit/generative-ui>
+- [A2UI](https://github.com/google/A2UI)  
+  - a2ui builder  <https://a2ui-composer.ag-ui.com/>  
+- [LangChain Agent Chat UI](https://github.com/langchain-ai/agent-chat-ui)  
+
+
+- **其他**
+  - [Assistant UI](https://github.com/assistant-ui/assistant-ui)  
+  - [Ant Design X](https://x.ant.design)  
+  - [Stream Chat React AI SDK](https://getstream.io/chat/docs/sdk/react/guides/ai-integrations/stream-chat-ai-sdk)  
+  - [Shadcn React AI 组件（AI Chat）](https://www.shadcn.io/ai)  
+
+
+### 类似想法
+
+- [ralph-tui](https://github.com/subsy/ralph-tui)
+- <https://github.com/mikeyobrien/ralph-orchestrator>
+  - 定位：改进版 Ralph Wiggum 技法的自主 AI 编排器，支持多 AI 后端，有交互式 TUI。
 
 
 ## bot-doc
