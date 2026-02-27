@@ -52,14 +52,31 @@
   - [Shadcn React AI 组件（AI Chat）](https://www.shadcn.io/ai)  
 
 
-### 类似想法
+### workflow
+
+- [Trigger.dev](https://trigger.dev)
+  - ✅ 基于云事件的无服务器工作流引擎，支持 TypeScript/JavaScript/Python 等语言，有 UI 控制台。
+- [temporalio/temporal](https://github.com/temporalio/temporal)
+  - ✅ Go/Java/TS/Python/.NET 需部署 用法类似Workflow DevKit
+- [Workflow DevKit ](https://useworkflow.dev/)
+  - CLI + UI + OTel 类库化 vercel 的 nextjs绑定
+- https://github.com/PrefectHQ/prefect
+  - ✅ python
+
+github action
+
+- [probot/probot](https://github.com/probot/probot) 
+  - app.on("issues.opened", async (context) => {})
+  - 非常适合lib使用
+
+## 类似想法
 
 - [ralph-tui](https://github.com/subsy/ralph-tui)
 - <https://github.com/mikeyobrien/ralph-orchestrator>
   - 定位：改进版 Ralph Wiggum 技法的自主 AI 编排器，支持多 AI 后端，有交互式 TUI。
 
 
-## bot-doc
+## doc确定性
 
 下载同步: git clone依赖的原始项目
 预处理：利用 Repomix 等工具将仓库“脱水”，剔除干扰，保留骨架。
