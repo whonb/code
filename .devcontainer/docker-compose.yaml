@@ -1,0 +1,16 @@
+name: nbcode-devcontainer
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspaces/main:cached
+      - ./.cache/home/whonb:/home/whonb:cached
+      - ./sync-home/.bashrc:/home/whonb/.bashrc:cached
+      - ./sync-home/.npmrc:/home/whonb/.npmrc:cached
+      - ./sync-home/.profile:/home/whonb/.profile:cached
+    # 覆盖默认运行命令，使其持续运行以待连接
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    # 使用 whonb 用户
+    user: whonb

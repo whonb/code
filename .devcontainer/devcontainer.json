@@ -1,13 +1,9 @@
 {
   "name": "whonb-nbcode",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "features": {
-    // "ghcr.io/devcontainers/features/git:1": {},
-    // "ghcr.io/devcontainers/features/github-cli:1": {}
-  },
-  "remoteUser": "node",
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/main",
+  "remoteUser": "whonb",
   "customizations": {
     "vscode": {
       "settings": {
@@ -15,11 +11,7 @@
         "dev.containers.copyGitConfig": false // 禁用从宿主机拷贝 git 配置
       }
     }
-  },
-  // "postCreateCommand": "node -v && git --version && gh --version && gemini --version"
-  "mounts": [
-    "source=${localWorkspaceFolder}/.devcontainer/sync-home/.bashrc,target=/home/node/.bashrc,type=bind,consistency=cached",
-    "source=${localWorkspaceFolder}/.devcontainer/sync-home/.npmrc,target=/home/node/.npmrc,type=bind,consistency=cached",
-    "source=${localWorkspaceFolder}/.devcontainer/sync-home/.profile,target=/home/node/.profile,type=bind,consistency=cached"
-  ]
+  }
+  // 如果需要安装扩展，可以在这里添加
+  // "extensions": ["esbenp.prettier-vscode"]
 }
