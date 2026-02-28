@@ -1,25 +1,23 @@
 {
   "name": "whonb-nbcode",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
-  "features": {
-    "ghcr.io/devcontainers/features/common-utils:2": {
-      "installZsh": false,
-      "upgradePackages": false,
-      "username": "vscode"
-    },
-    // "ghcr.io/devcontainers/features/node:1": {
-    //   "version": "20"
-    // },
-    "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+  "build": {
+    "dockerfile": "Dockerfile"
   },
-  "remoteUser": "vscode",
+  "features": {
+    // "ghcr.io/devcontainers/features/git:1": {},
+    // "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "remoteUser": "node",
   "customizations": {
     "vscode": {
       "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "dev.containers.copyGitConfig": false // 禁用从宿主机拷贝 git 配置
       }
     }
   },
-  // "postCreateCommand": "bash -lc 'npm install -g @google/gemini-cli @openai/codex && node -v && git --version && gh --version && gemini --version && codex --version'"
+  // "postCreateCommand": "node -v && git --version && gh --version && gemini --version"
+  "mounts": [
+    "source=${localWorkspaceFolder}/.devcontainer/home,target=/home/node,type=bind,consistency=cached"
+  ]
 }
