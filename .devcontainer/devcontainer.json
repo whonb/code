@@ -18,6 +18,8 @@
   },
   // "postCreateCommand": "node -v && git --version && gh --version && gemini --version"
   "mounts": [
-    "source=${localWorkspaceFolder}/.devcontainer/home,target=/home/node,type=bind,consistency=cached"
+    "source=${localWorkspaceFolder}/.devcontainer/sync-home/.bashrc,target=/home/node/.bashrc,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/.devcontainer/sync-home/.npmrc,target=/home/node/.npmrc,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/.devcontainer/sync-home/.profile,target=/home/node/.profile,type=bind,consistency=cached"
   ]
 }
