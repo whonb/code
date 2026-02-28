@@ -78,10 +78,15 @@ build() {
 
 check() {
   dev() {
-    _run tsc -p tsconfig.json
+    _run npx tsc -p tsconfig.json
+    _run docker run --rm -i hadolint/hadolint < .devcontainer/Dockerfile
   }
   build() {
-    _run tsc -p tsconfig.build.json
+    _run npx tsc -p tsconfig.build.json
+  }
+  all() {
+    dev
+    build
   }
 }
 

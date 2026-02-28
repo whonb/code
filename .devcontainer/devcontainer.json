@@ -1,0 +1,29 @@
+{
+  "name": "nbcode Dev Container",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/nbcode",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+      ],
+      "settings": {
+        "typescript.preferences.importModuleSpecifier": "relative",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+        },
+        "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
+      }
+    }
+  },
+
+  "remoteUser": "node",
+
+  "forwardPorts": [],
+
+  "portsAttributes": {},
+
+  "otherPortsAttributes": {}
+}
