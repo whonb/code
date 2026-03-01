@@ -40,9 +40,16 @@ ws() {
 # 应用项目补充的公共脚本，不在bake维护范围
 # 此位置以上的全都是bake工具脚本，copy走可以直接用，之下的为项目特定cmd，自己弄
 ####################################################################################
-docker() {
+compose() {
+  build() {
+    # --progress=plain
+    _run docker-compose --project-directory .devcontainer/ build "$@"
+  }
   up() {
-    _run docker-compose up -d --build --remove-orphans   
+    _run docker-compose --project-directory .devcontainer/ up -d --build --remove-orphans  --force-recreate  "$@"
+  }
+  down() {
+    _run docker-compose --project-directory .devcontainer/ down  "$@"
   }
 }
 info() {

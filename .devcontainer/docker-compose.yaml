@@ -1,11 +1,13 @@
+# project name
 name: nbcode-devcontainer
 services:
   app:
+    container_name: nbcode-app
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ..:/workspaces/main:cached
+      - ..:/workspace/:cached
       - ./.cache/home/whonb:/home/whonb:cached
       - ./sync-home/.bashrc:/home/whonb/.bashrc:cached
       - ./sync-home/.npmrc:/home/whonb/.npmrc:cached
