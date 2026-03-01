@@ -9,7 +9,7 @@ services:
     volumes:
       - ..:/workspace/:cached
       # 只挂载特定产生的运行时目录到本地 .cache
-      - ./.cache/npm:/home/whonb/.npm:cached
+      - ./.cache/home/whonb:/home/whonb:cached
       # 挂载宿主机配置
       - ./sync-home/.bashrc:/home/whonb/.bashrc:cached
       - ./sync-home/.npmrc:/home/whonb/.npmrc:cached

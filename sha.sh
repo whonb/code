@@ -46,6 +46,7 @@ compose() {
     _run docker-compose --project-directory .devcontainer/ build "$@"
   }
   up() {
+    mkdir -p .devcontainer/.cache/home/whonb
     _run docker-compose --project-directory .devcontainer/ up -d --build --remove-orphans  --force-recreate  "$@"
   }
   down() {
@@ -70,8 +71,9 @@ update() {
 }
 
 clean() {
-  _run rm -rf ./**/build
-  _run rm -rf ./**/dist
+  _run rm -rf ./.devcontainer/.cache
+  _run rm -rf ./build
+  _run rm -rf ./dist
 }
 
 ####################################################
