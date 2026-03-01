@@ -16,7 +16,18 @@ RUN apt update -y \
 # 安装 Homebrew 所需依赖
 RUN apt install -y build-essential procps file
 
-# 安装 Homebrew 并配置国内镜像 (清华大学 TUNA 镜像)
+# 安装指定版本的 Node.js (例如 20.4.0)
+# 使用阿里云镜像二进制文件直接安装，这是国内最快且支持精确版本的方式
+ENV NODE_VERSION=20.4.0
+RUN curl -fsSL "https://npmmirror.com/mirrors/node/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz" -o node.tar.xz \
+    && mkdir -p /usr/local/lib/nodejs \
+    && tar -xJf node.tar.xz -C /usr/local/lib/nodejs --strip-components=1 \
+    && rm node.tar.xz \
+    && ln -s /usr/local/lib/nodejs/bin/node /usr/local/bin/node \
+    && ln -s /usr/local/lib/nodejs/bin/npm /usr/local/bin/npm \
+    && ln -s /usr/local/lib/nodejs/bin/npx /usr/local/bin/npx
+
+# 安装 Homebrew 并配置国内镜像 (清华大学 TUNA 镜像): https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/
 ENV HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git" \
     HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git" \
     HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/help/homebrew-bottles" \
@@ -30,10 +41,6 @@ RUN NONINTERACTIVE=1 /bin/bash /tmp/brew-install/install.sh \
   && rm -rf /tmp/brew-install
 
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
-
-# RUN --mount=type=bind,source=.cache/home/whonb,target=/home/whonb \
-#   curl https://mise.run | sh
-# RUN ~/.local/bin/mise --version
 
 # RUN --mount=type=bind,source=.cache/home/whonb,target=/home/whonb \
 #   mise use -g node@20
