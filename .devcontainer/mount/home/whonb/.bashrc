@@ -155,3 +155,37 @@ if [[ "$TERM" == "xterm" ]]; then
     # Append to PROMPT_COMMAND to call precmd before displaying the prompt
     PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }precmd"
 fi
+
+
+####################### whonb custom cmd #######################
+
+# Usage: _up_exec <script> [args...]
+# 向上查找<script>文件，找到执行, 执行的workdir不变
+# --- 核心逻辑：向上查找并执行 ---
+_up_exec() {
+    local script_name="$1"
+    shift
+    
+    local target_dir="$PWD"
+    local parent_dir
+    
+    until [[ -x "$target_dir/$script_name" ]]; do
+        parent_dir=$(cd "$target_dir/.." && pwd)
+        
+        # 使用 -ef 判断物理位置是否相同（解决 / 与 // 的匹配问题）
+        if [[ "$target_dir" -ef "$parent_dir" ]]; then
+            echo "Error: '$script_name' not found in parent tree (reached root dir : '/$script_name')."
+            return 1
+        fi
+        
+        target_dir="$parent_dir"
+        # echo "Debug: target_dir=$target_dir" # 如果需要观察过程可以取消注释
+    done
+
+    # 找到后执行
+    "$target_dir/$script_name" "$@"
+}
+
+
+alias sha="_up_exec sha.sh"
+alias shab="_up_exec shab.sh"

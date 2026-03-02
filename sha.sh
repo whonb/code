@@ -55,6 +55,9 @@ dev() {
   clean() {
     _run rm -rf ./.devcontainer/.cache
   }
+  run() {
+    _run tsx src/cli.ts
+  }
 }
 info() {
   ip() {
@@ -79,16 +82,8 @@ clean() {
 }
 
 ####################################################
-# 开发命令 (从 package.json scripts 迁移)
+# 构建与检查
 ####################################################
-
-dev() {
-  _run tsx src/cli.ts
-}
-
-build() {
-  _run npm run typecheck:build && tsup src/cli.ts --format esm --dts --out-dir dist --clean
-}
 
 check() {
   dev() {
@@ -111,6 +106,95 @@ lint() {
 
 test() {
   _run vitest run
+}
+
+completion() {
+  bash() {
+    cat <<'EOF'
+# bash completion for sha.sh
+_sha_completion() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    local cmd_line=("${COMP_WORDS[@]:0:COMP_CWORD}")
+    # 获取子命令列表：执行当前命令链，捕获帮助信息中的命令列表
+    local subcmds=$("${cmd_line[@]}" 2>/dev/null | sed -n '/Available Commands:/,/^$/p' | grep "^  " | awk '{print $1}')
+    COMPREPLY=( $(compgen -W "$subcmds" -- "$cur") )
+}
+complete -F _sha_completion ./sha.sh
+complete -F _sha_completion sha
+EOF
+  }
+}
+# ... 在 sha "$@" 之前添加 ...
+
+proxy() {
+  up() (
+    # 使用 up -d。如果配置有变（比如密码更新了），docker 会自动重新创建容器
+    # Use --force-recreate to ensure containers are recreated if config changed
+    cd "$ROOT_DIR/_self"
+    _run docker compose up -d --force-recreate
+    echo "${c_info}✅ 完成！代理容器已在后台运行（带自动重启策略）,运行'c proxy chrom'浏览器 。${c_reset}"
+  )
+  down() (
+    cd "$ROOT_DIR/_self"
+    _run docker compose down
+  )
+  chrome() {
+    # --user-data-dir="$HOME/.chrome-outline" \
+    _run open -na "Google Chrome" --args \
+      --proxy-server="socks5://127.0.0.1:1081" \
+      --no-first-run
+  }
+  doubao() {
+    _run open -na "Doubao" --args \
+      --proxy-server="socks5://127.0.0.1:1081" \
+      --no-first-run
+  }
+  code() {
+    _run open -na "Visual Studio Code" --args \
+      --proxy-server="socks5://127.0.0.1:1081" \
+      --no-first-run
+  }
+  pycharm() {
+    _run open -na "PyCharm.app" --args \
+      -Dhttp.proxyHost=127.0.0.1 \
+      -Dhttp.proxyPort=1080 \
+      -Dhttps.proxyHost=127.0.0.1 \
+      -Dhttps.proxyPort=1080 \
+      -DsocksProxyHost=127.0.0.1 \
+      -DsocksProxyPort=1081
+
+  }
+  py() {    
+    # 设置 HTTP/HTTPS 代理 (指向你的 1081 端口)
+    export http_proxy="http://127.0.0.1:1080"
+    export https_proxy="http://127.0.0.1:1080"
+    # 设置 SOCKS5 代理 (指向你的 1080 端口，常用于 all_proxy)
+    export all_proxy="socks5://127.0.0.1:1081"
+    # 设置不走代理的地址
+    export no_proxy="*.local,localhost,127.0.0.1,localaddress,.localdomain.com,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12"
+
+    _run open -na "PyCharm.app"
+  }
+  bash() {    
+    # 设置 HTTP/HTTPS 代理 (指向你的 1081 端口)
+    export http_proxy="http://127.0.0.1:1080"
+    export https_proxy="http://127.0.0.1:1080"
+    # 设置 SOCKS5 代理 (指向你的 1080 端口，常用于 all_proxy)
+    export all_proxy="socks5://127.0.0.1:1081"
+    # 设置不走代理的地址
+    export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+
+    command bash
+  }
+  test() {
+    _run curl google.com
+  }
+  info() {
+    export | grep -E "http_proxy|https_proxy|all_proxy|no_proxy" || true
+  }
+}
+p() {
+  proxy "$@"
 }
 
 ####################################################
