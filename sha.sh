@@ -40,7 +40,7 @@ ws() {
 # 应用项目补充的公共脚本，不在bake维护范围
 # 此位置以上的全都是bake工具脚本，copy走可以直接用，之下的为项目特定cmd，自己弄
 ####################################################################################
-compose() {
+dev() {
   build() {
     # --progress=plain
     _run docker-compose --project-directory .devcontainer/ build "$@"
@@ -51,6 +51,9 @@ compose() {
   }
   down() {
     _run docker-compose --project-directory .devcontainer/ down  "$@"
+  }
+  clean() {
+    _run rm -rf ./.devcontainer/.cache
   }
 }
 info() {
@@ -71,7 +74,6 @@ update() {
 }
 
 clean() {
-  _run rm -rf ./.devcontainer/.cache
   _run rm -rf ./build
   _run rm -rf ./dist
 }
